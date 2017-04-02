@@ -1,0 +1,9 @@
+bigrams = load 's3://cse6242-2017spring-bigrams-big/*' as (bigram:chararray, year:int, occurrences:float, books:float);
+filter_bigrams = FILTER bigrams BY books>19 AND occurrences>99;
+grouped = GROUP filter_bigrams BY bigram;
+total_books = FOREACH grouped GENERATE group as bigram:chararray, SUM(filter_bigrams.occurrences) / SUM(filter_bigrams.books) AS ratio;
+ordered = ORDER total_books BY ratio DESC; 
+final = LIMIT ordered 10;
+store final into 's3://cse6242-cmcnulty6/output-big';
+
+

@@ -1,0 +1,1 @@
+I started by creating 2 dataframes, one for in-degree and one for out-degree, and calculated the weight of each node in each dataframe. Then, I joined the two dataframe by node name and created columns in the joined frame for in and out degree. Finally, I created a calculated column per the assignments instructions using '.withColumn' and formatted the output.
